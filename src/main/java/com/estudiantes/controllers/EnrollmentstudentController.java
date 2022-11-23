@@ -74,18 +74,19 @@ public class EnrollmentstudentController {
 		}*/
     
     
-    @ApiOperation(value = "Insert Enrollmentstudent ", response = Enrollmentstudent.class)
-    @ApiResponses(value = {
-        @ApiResponse(code = 200, message = "Success|OK"),
-        @ApiResponse(code = 401, message = "not authorized!"),
-        @ApiResponse(code = 403, message = "forbidden!!!"),
-        @ApiResponse(code = 404, message = "not found!!!"),
-        })
+    
+   
     
     
   //Trae todas las matrticulas
     //@CrossOrigin(origins= "https://integrdor5frontend.herokuapp.com")
     @ApiOperation(value = "Obtiene una lista con todas las matrículas.")
+    @ApiResponses(value = {
+	@ApiResponse(code = 200, message = "Success|OK"),
+	@ApiResponse(code = 401, message = "not authorized!"),
+	@ApiResponse(code = 403, message = "forbidden!!!"),
+	@ApiResponse(code = 404, message = "not found!!!"),
+	})
     @GetMapping("/")
     public Iterable<Enrollmentstudent> getEnrollmentstudent() {
         return enrollmentstudentService.findAll();
