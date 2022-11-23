@@ -21,9 +21,9 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
+@Api(value = "CareersAPI")
 @RestController
 @RequestMapping("/api/careers")
-@Api(value = "CareersAPI")
 public class CareerController {
 	
 	@Autowired
