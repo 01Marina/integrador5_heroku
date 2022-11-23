@@ -45,16 +45,17 @@ public class CareerController {
 	    }
      * */
 	
-    @ApiOperation(value = "Get list of persons by surname ", response = Iterable.class)
-    @ApiResponses(value = {
-        @ApiResponse(code = 200, message = "Success|OK"),
-        @ApiResponse(code = 401, message = "not authorized!"),
-        @ApiResponse(code = 403, message = "forbidden!!!"),
-        @ApiResponse(code = 404, message = "not found!!!") })
+    
+    
     
   //Trae todas las carreras
     //@CrossOrigin(origins= "https://integrdor5frontend.herokuapp.com")
     @ApiOperation(value = "Obtiene la lista de todas las carreras.")
+    @ApiResponses(value = {
+	@ApiResponse(code = 200, message = "Success|OK"),
+	@ApiResponse(code = 401, message = "not authorized!"),
+	@ApiResponse(code = 403, message = "forbidden!!!"),
+	@ApiResponse(code = 404, message = "not found!!!") })
     @GetMapping("/")
     public Iterable<Career> getCareers() {
         return careerService.findAll();
