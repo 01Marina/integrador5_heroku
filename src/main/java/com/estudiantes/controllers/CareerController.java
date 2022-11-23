@@ -23,12 +23,13 @@ import io.swagger.annotations.ApiResponses;
 
 @RestController
 @RequestMapping("/api/careers")
-@Api(value = "CareerController")
+@Api(value = "CareersAPI")
 public class CareerController {
 	
 	@Autowired
     private CareerService careerService; //inyecta la dependencia
 	//@CrossOrigin(origins= "https://integrdor5frontend.herokuapp.com")
+	@ApiOperation(value = "Crea una carrera y la inserta en la base de dadtos.")
 	@PostMapping("/insert")
 	public ResponseEntity<Career> newStudent2(@Valid @RequestBody Career c) {
        if(careerService.existStudent(c)) {
@@ -53,6 +54,7 @@ public class CareerController {
     
   //Trae todas las carreras
     //@CrossOrigin(origins= "https://integrdor5frontend.herokuapp.com")
+    @ApiOperation(value = "Obtiene la lista de todas las carreras.")
     @GetMapping("/")
     public Iterable<Career> getCareers() {
         return careerService.findAll();
@@ -60,6 +62,7 @@ public class CareerController {
     
     //2 f) recuperar las carreras con estudiantes inscriptos, y ordenar por cantidad de inscriptos.
     //@CrossOrigin(origins= "https://integrdor5frontend.herokuapp.com")
+    @ApiOperation(value = "Obtiene las carreras con estudiantes inscriptos, y ordenar por cantidad de inscriptos.")
     @GetMapping("/orderbysubscribers")
     public Iterable<Career> getCarrerasOrdenCantAlumnos(){
     	return careerService.getCarrerasOrdenCantAlumnos();
@@ -73,6 +76,7 @@ public class CareerController {
     //y se agregó query sql nativo que consume este mapeo
     // ver lines 23 a 43 de la clase Career.
     //@CrossOrigin(origins= "https://integrdor5frontend.herokuapp.com")
+    @ApiOperation(value = "Genera un reporte de las carreras, incluye información de los inscriptos y egresados por año, ordenadas afabéticamente y presenta los años cronologicamente.")
     @GetMapping("/report")
     public Iterable<DTOCareerReport> getCareerReport(){
     	return careerService.getCareerReport();
