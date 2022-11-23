@@ -24,7 +24,7 @@ import org.springframework.http.ResponseEntity;
 
 @RestController
 @RequestMapping("/api/enrollmentstudents")
-@Api(value = "EnrollmentstudentController")
+@Api(value = "EnrollmentstudentsAPI")
 public class EnrollmentstudentController {
 	
 	@Autowired
@@ -39,6 +39,7 @@ public class EnrollmentstudentController {
    
 	 //2 b) matricular un estudiante en una carrera
     //@CrossOrigin(origins= "https://integrdor5frontend.herokuapp.com")
+    @ApiOperation(value = "Crea una matrícula y la inserta en la base de datos.")
     @PostMapping("/insert")
     public ResponseEntity<Enrollmentstudent> newEnrollmentstudent(@Valid @RequestBody DTOEnrollmentstudentBodyInsert e) {
     	if(enrollmentstudentService.existEnrollmentstudent(e)) {
@@ -84,6 +85,7 @@ public class EnrollmentstudentController {
     
   //Trae todas las matrticulas
     //@CrossOrigin(origins= "https://integrdor5frontend.herokuapp.com")
+    @ApiOperation(value = "Obtiene una lista con todas las matrículas.")
     @GetMapping("/")
     public Iterable<Enrollmentstudent> getEnrollmentstudent() {
         return enrollmentstudentService.findAll();
