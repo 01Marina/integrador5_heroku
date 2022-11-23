@@ -22,9 +22,9 @@ import io.swagger.annotations.ApiResponses;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+@Api(value = "EnrollmentstudentsAPI")
 @RestController
 @RequestMapping("/api/enrollmentstudents")
-@Api(value = "EnrollmentstudentsAPI")
 public class EnrollmentstudentController {
 	
 	@Autowired
