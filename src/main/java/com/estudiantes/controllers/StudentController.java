@@ -15,23 +15,17 @@ import org.springframework.web.bind.annotation.*;
 import com.estudiantes.model.Student;
 import com.estudiantes.services.StudentService;
 
+@Api(tags = "StudentsAPI")
 @RestController
 @RequestMapping("/api/students")
 public class StudentController {
 	 @Autowired
 	    private StudentService studentService; //inyecta la dependencia
 	    
-	  //Trae todos los estudiantes
-	    //@CrossOrigin(origins= "https://integrdor5frontend.herokuapp.com")
-	    @GetMapping("")
-	    public Iterable<Student> getStudents() {
-	        return studentService.findAll();
-	    }
-	    
-	    
 	    //2a
 	    //crea un nuevo estudiante
 	    //@CrossOrigin(origins= "https://integrdor5frontend.herokuapp.com")
+	    @ApiOperation(value = "Crea un nuevo estudiante y lo inserta en la base de datos.")
 	    @PostMapping("/insert")
 	    public ResponseEntity<Student> newStudent2(@Valid @RequestBody Student s) {
 	       if(studentService.existStudent(s)) {
@@ -54,17 +48,28 @@ public class StudentController {
 	        }
 	     * */
 	    
-	    
-	        @ApiOperation(value = "Get list of persons by surname ", response = Iterable.class)
 	    @ApiResponses(value = {
 	            @ApiResponse(code = 200, message = "Success|OK"),
 	            @ApiResponse(code = 401, message = "not authorized!"),
 	            @ApiResponse(code = 403, message = "forbidden!!!"),
 	            @ApiResponse(code = 404, message = "not found!!!") })
 	        
-	    //2c) recuperar todos los estudiantes, y especificar algún criterio de ordenamiento simple
+	 //Trae todos los estudiantes
+	    @ApiOperation(value = "Obtiene la lista de todos los estudiantes.")
+	    //@CrossOrigin(origins= "https://integrdor5frontend.herokuapp.com")
+	    @GetMapping("")
+	    public Iterable<Student> getStudents() {
+	        return studentService.findAll();
+	    }    
+	//2c) recuperar todos los estudiantes, y especificar algún criterio de ordenamiento simple
 	    //TESTEADO EN POSTMAN
-	//@CrossOrigin(origins= "https://integrdor5frontend.herokuapp.com")    
+	//@CrossOrigin(origins= "https://integrdor5frontend.herokuapp.com")  
+	@ApiOperation(value = "Obtiene todos los estudiantes, ordenados alfabéticamente por nombre.")
+	@ApiResponses(value = {
+	            @ApiResponse(code = 200, message = "Success|OK"),
+	            @ApiResponse(code = 401, message = "not authorized!"),
+	            @ApiResponse(code = 403, message = "forbidden!!!"),
+	            @ApiResponse(code = 404, message = "not found!!!") })
 	@GetMapping("/sortedbyname")
 	    public Iterable<Student> getStudentsByOrder() {
 	    	return studentService.getStudentsByOrder();
@@ -72,7 +77,13 @@ public class StudentController {
 	    
 	    //2d) recuperar un estudiante, en base a su número de libreta universitaria.
 	    //TESTEADO EN POSTMAN
-	//@CrossOrigin(origins= "https://integrdor5frontend.herokuapp.com")    
+	//@CrossOrigin(origins= "https://integrdor5frontend.herokuapp.com")
+	@ApiOperation(value = "Obtiene un estudiante en base a un número de libreta universitaria.")
+	@ApiResponses(value = {
+	            @ApiResponse(code = 200, message = "Success|OK"),
+	            @ApiResponse(code = 401, message = "not authorized!"),
+	            @ApiResponse(code = 403, message = "forbidden!!!"),
+	            @ApiResponse(code = 404, message = "not found!!!") })
 	@GetMapping("/bookNumber/{bookNumber}")
 	    public Student getStudentByBookNumber(@PathVariable Integer bookNumber) {
 	    	return studentService.getStudentByBookNumber(bookNumber);
@@ -80,7 +91,13 @@ public class StudentController {
 	  
 	    //2e) recuperar todos los estudiantes, en base a su género.
 	    //TESTEADO EN POSTMAN
-	//@CrossOrigin(origins= "https://integrdor5frontend.herokuapp.com")    
+	//@CrossOrigin(origins= "https://integrdor5frontend.herokuapp.com")
+	@ApiOperation(value = "Obtiene una lista de estudiantes que sean del genero especificado, f(femenino), m(masculino).")
+	@ApiResponses(value = {
+	            @ApiResponse(code = 200, message = "Success|OK"),
+	            @ApiResponse(code = 401, message = "not authorized!"),
+	            @ApiResponse(code = 403, message = "forbidden!!!"),
+	            @ApiResponse(code = 404, message = "not found!!!") })
 	@GetMapping("/gender/{gender}")
 	    public Iterable<Student> getStudentsByGender(@PathVariable String gender) {
 	    	return studentService.getStudentsByGender(gender);
@@ -89,7 +106,13 @@ public class StudentController {
 
 	    //2g) recuperar los estudiantes de una determinada carrera, filtrado por ciudad de residencia.
 	    //NO ESTÁ TESTEADA
-	//@CrossOrigin(origins= "https://integrdor5frontend.herokuapp.com")    
+	//@CrossOrigin(origins= "https://integrdor5frontend.herokuapp.com")
+	@ApiOperation(value = "Obtiene una lista de estudiantes inscriptos en una carrera dada y que sean de una localodad dada.")
+	@ApiResponses(value = {
+	            @ApiResponse(code = 200, message = "Success|OK"),
+	            @ApiResponse(code = 401, message = "not authorized!"),
+	            @ApiResponse(code = 403, message = "forbidden!!!"),
+	            @ApiResponse(code = 404, message = "not found!!!") })
 	@GetMapping("/{career}/{city}")
 	    public Iterable<Student> getStudentsByCareerAndCity(@PathVariable String career, @PathVariable String city) {
 	    	return studentService.getStudentsByCareerAndCity(career, city);
